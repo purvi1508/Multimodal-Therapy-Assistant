@@ -4,3 +4,7 @@ transformers
 torchaudio 
 librosa 
 soundfile
+deepface
+tf-keras
+speechbrain 
+torchaudio
