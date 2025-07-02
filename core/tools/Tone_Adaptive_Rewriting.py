@@ -3,6 +3,7 @@ import json
 from langchain_google_genai import ChatGoogleGenerativeAI
 from pydantic import BaseModel
 from llm_object import llm
+from services.mcp_server.server import mcp
 
 class RewrittenOutput(BaseModel):
     rewritten_text: str
@@ -15,6 +16,7 @@ def extract_json(content: str) -> dict:
         content = re.sub(r"\n?```$", "", content)
     return json.loads(content)
 
+@mcp.tool(name="Adapt Tone")
 def adapt_tone(text: str, tone: str) -> RewrittenOutput:
     prompt = f"""
             Rewrite the following text in a {tone} tone, while preserving its original meaning.

@@ -4,6 +4,7 @@ from typing import List
 import json
 from llm_object import llm
 import re
+from services.mcp_server.server import mcp
 
 TAXONOMIES = {
     "ekman": ["anger", "disgust", "fear", "joy", "sadness", "surprise"],
@@ -34,6 +35,7 @@ def extract_json_from_code_block(content: str) -> dict:
         content = re.sub(r"\n?```$", "", content)
     return json.loads(content)
 
+@mcp.tool(name="Analyze Emotions")
 def analyze_emotions(text: str) -> EmotionAnalysisOutput:
 
     all_results = []

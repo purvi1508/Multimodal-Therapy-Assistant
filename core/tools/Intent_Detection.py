@@ -3,6 +3,7 @@ import re
 from langchain_google_genai import ChatGoogleGenerativeAI
 from pydantic import BaseModel, Field
 from llm_object import llm
+from services.mcp_server.server import mcp
 
 class IntentResult(BaseModel):
     label: str
@@ -19,7 +20,7 @@ def extract_json_from_code_block(content: str) -> dict:
         content = re.sub(r"\n?```$", "", content)
     return json.loads(content)
 
-
+@mcp.tool(name="Detect Intent")
 def detect_intent(text: str) -> IntentResult:
 
     prompt = f"""
