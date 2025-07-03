@@ -8,3 +8,7 @@ deepface
 tf-keras
 speechbrain 
 torchaudio
+espnet
+langchain-google-genai
+langchain
+pydub
